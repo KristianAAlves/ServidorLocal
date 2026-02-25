@@ -1,35 +1,21 @@
 import express from "express";
+import { adicionarServico } from "./servico.js";
 
 const app = express();
 
-interface Alunos{
-    nome: string;
-    id: string;
-    contato?: string | null;
-}
 
-const alunos: Array<Alunos> = [
-    {
-        nome:       "manel",
-        id:         "23",
-        contato:    "243637"
-    },
-    {
-        nome:       "sarg",
-        id:         "2",
-        contato:    null
-    },
-    {
-        nome:       "arg",
-        id:         "2354",
-    },
-
-]
 
 app.get('/',(req, res) => {
     console.log("Hello World");
     res.send("Hello World");
 });
+
+
+app.post("/adicionar_servico", (req, res) =>{
+    const servico = req.body;
+    adicionarServico(servico);
+})
+
 
 app.listen(8080,() => {
     console.log("Servidor rodando");
