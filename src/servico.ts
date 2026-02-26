@@ -7,12 +7,12 @@ interface ServicoType {
 }
 
 interface ResponseType {
-    status: boolean;
-    nomeServico: string;
-    data: ServicoType;
+    status:                 boolean;
+    nomeServico:            string;
+    data:                   ServicoType;
 }
 
-let servico: ServicoType = {
+let servicotest: ServicoType = {
     nome:                   "gfg",
     precoHora:              0,
     categoria:              "defgdfg",
@@ -20,17 +20,9 @@ let servico: ServicoType = {
     percentagemDesconto:    0,
 }
 
-let catalogoServicos: ServicoType[] = [
-    {
-    nome:                   " ",
-    precoHora:              0,
-    categoria:              "",
-    minimoDescontos:        0,
-    percentagemDesconto:    0,
-    }
-]
+let catalogoServicos: ServicoType[] = []
 
-export function adicionarServico(servico: ServicoType): ResponseType | string {
+export function AdicionarServico(servico: ServicoType): ResponseType | string {
 
     if(!servico.nome){
         return "Erro: insira um nome";
@@ -50,11 +42,28 @@ export function adicionarServico(servico: ServicoType): ResponseType | string {
 
     return(
         {
-            status: true,
-            nomeServico: servico.nome,
-            data: servico
-    }
+        status:             true,
+        nomeServico:        servico.nome,
+        data:               servico
+    }   
     )
 }
 
-console.log(adicionarServico(servico))
+export function ListarServico(): ServicoType[]{
+    //TODO: implementar fetch servicos
+    return catalogoServicos;
+}
+
+export function ApagarServico(nome: string): boolean{
+    // TODO: implementar delete de servicos
+
+    const catalogoTemp: ServicoType[] = [];
+
+        for(let i = 0; i < catalogoServicos.length; i++){
+            if(catalogoServicos[i]?.nome && catalogoServicos[i]?.nome !== nome){
+                catalogoTemp.push(catalogoServicos[i]!)
+        }
+}
+    catalogoServicos = catalogoTemp;
+    return true;
+}
