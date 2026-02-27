@@ -1,16 +1,4 @@
-interface ServicoType {
-    nome:                   string;
-    precoHora:              number;
-    categoria:              string;
-    minimoDescontos:        number;
-    percentagemDesconto:    number;
-}
-
-interface ResponseType {
-    status:                 boolean;
-    nomeServico:            string;
-    data:                   ServicoType;
-}
+import type { ServicoType, ResponseType } from "./utils/types.js";
 
 let servicotest: ServicoType = {
     nome:                   "gfg",
@@ -20,7 +8,7 @@ let servicotest: ServicoType = {
     percentagemDesconto:    0,
 }
 
-let catalogoServicos: ServicoType[] = []
+export let catalogoServicos: ServicoType[] = []
 
 export function AdicionarServico(servico: ServicoType): ResponseType | string {
 
@@ -66,4 +54,13 @@ export function ApagarServico(nome: string): boolean{
 }
     catalogoServicos = catalogoTemp;
     return true;
+}
+
+export function obterServico(nome: string): ServicoType | null {
+        for(let i = 0; i < catalogoServicos.length; i++){
+            if(catalogoServicos[i]?.nome && catalogoServicos[i]?.nome === nome){
+                return catalogoServicos[i]!;
+            }
+        }
+        return null;
 }

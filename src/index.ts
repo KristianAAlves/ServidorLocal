@@ -1,5 +1,6 @@
 import express, {type Request, type Response} from "express";
-import { AdicionarServico, ApagarServico, ListarServico } from "./servico.js";
+import { AdicionarServico, ApagarServico, ListarServico, obterServico } from "./servico.js";
+import { SelecionarServicos } from "./orcamento.js";
 
 const app = express();
 app.use(express.json())
@@ -36,6 +37,28 @@ app.delete("/apagar-servico", (req: Request, res: Response) => {
         }
     )}
 })
+
+app.get("/obter-servico", (req: Request, res: Response) => {
+    const {nome} = req.query;
+
+    if(nome){
+        const obterServicoResponse = obterServico(nome as string);
+        res.json(obterServicoResponse);
+    }
+    else{
+        res.json({
+            message: "Nome é necessário"
+        });
+    }
+})
+
+app.post("/selecionar-servico", (req: Request, res: Response) =>{
+    const { nome } = req.body;
+    
+    const SelecionarServicoResponse = SelecionarServicos(nome);
+    res.json(SelecionarServicoResponse);
+})
+
 
 app.listen(8080,() => {
     console.log("Servidor rodando");
