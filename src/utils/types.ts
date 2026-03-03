@@ -9,7 +9,7 @@ export interface ServicoType {
 export interface ResponseType {
     status:                 boolean;
     nomeServico:            string;
-    data:                   ServicoType;
+    data:                   ServicoType | string;
 }
 
 export interface PedidoServico{
@@ -17,4 +17,15 @@ export interface PedidoServico{
     descricao:              string;
     horasEstimadas:         number;
     urgente:                boolean
+}
+
+
+
+export interface PrestadorType {
+    nome:                   string;
+    precoHora:              number;
+    profissao:              string;
+    minimoParaDesconto:     number;
+    percentagemDesconto:    number;
+    taxaUrgencia:           number;
 }
