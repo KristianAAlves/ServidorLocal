@@ -1,10 +1,12 @@
 import mysql from "mysql2/promise";
-require('.env').config();
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const db = mysql.createPool({
     host: "localhost",
-    user: "admin",
-    password: "",
+    user: "root",
+    password: `${process.env.DATABASE_PASSWORD}`,
     database: "servidor_local"
 });
 

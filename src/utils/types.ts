@@ -29,3 +29,19 @@ export interface PrestadorType {
     percentagemDesconto:    number;
     taxaUrgencia:           number;
 }
+
+
+export interface UserType{
+    id:                     string,
+    nome:                   string,
+    numero_identificacao:   string,
+    data_nascimento:        string,
+    email:                  string,
+    password:               string,
+    telefone:               string,
+    pais:                   string,
+    localidade:             string,
+    enabled:                boolean,
+    created_at:             string,
+    updated_at:             string
+}

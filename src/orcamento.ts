@@ -12,7 +12,7 @@ const pedido: PedidoServico =
 
 const precoHora: number = 10;
 
-const servicoSelecionados: ServicoType[] = []
+const servicoSelecionados: ServicoType[] = [];
 
 /*
 #################################################
@@ -85,6 +85,16 @@ export function SelecionarPrestador(prestador: PrestadorType){
 
 }
 
+
+
+export function ApagarPrestador(nome: string){
+        for (let i = 0; i < prestadoresDeServicos.length; i++){
+            if (prestadoresDeServicos[i]?.nome && prestadoresDeServicos[i]?.nome === nome){
+                prestadoresDeServicos!.splice(i, 1);
+                return true;
+            }
+}
+}
 
 
 
