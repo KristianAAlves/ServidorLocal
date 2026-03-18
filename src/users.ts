@@ -1,4 +1,3 @@
-import { error } from "node:console";
 import db from "./lib/db.js";
 import type { UserType } from "./utils/types.js"
 
@@ -30,29 +29,65 @@ export async function GetUserById(id: string){
 
 
 export async function InsertUser(user: UserType){
-
-    let query = `INSERT INTO table_utilizadores VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+`
+    const agora = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    let query = 
+    INSERT INTO table_utilizadores (
+        id, nome, numero_identificacao, data_nascimento, email, 
+        password, telefone, pais, localidade, enabled, 
+        created_at, update_at
+    ) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     let values = [
                     user.id,
-                    user.nome, 
+                    user.nome,
+                    user.numero_identificacao, 
                     user.data_nascimento, 
                     user.email, 
                     user.password, 
                     user.telefone, 
                     user.pais, 
-                    user.localidade, 
+                    user.localidade,
                     user.enabled, 
-                    new Date(), 
-                    new Date()];
-
-
+                    agora, 
+                    agora];
+              
+console.log(values.length)
     try{
-        const rows = await db.execute(query, values);
+        
+        const [rows] =  await db.query(query, values)
         return rows;
     }
     catch(err){
        console.log("dgh",err);
        return null;
+    }`
+
+    const agora = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+    const query = `INSERT INTO table_utilizadores (id, nome, numero_identificacao, data_nascimento, email, password, telefone, pais, localidade, enabled, created_at, update_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+
+    const values = [
+        String(user.id),
+        String(user.nome),
+        String(user.numero_identificacao),
+        user.data_nascimento, 
+        String(user.email),
+        String(user.password),
+        user.telefone ? String(user.telefone) : null,
+        String(user.pais),
+        String(user.localidade),
+        user.enabled ? 1 : 0, 
+        agora, 
+        agora 
+    ];
+
+    try {
+        const [rows] = await db.execute(query, values);
+        return rows;
+    } catch (err) {
+        console.error("Erro Fatal:", err);
+        return null;
     }
 }
     
