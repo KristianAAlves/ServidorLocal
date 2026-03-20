@@ -40,6 +40,7 @@ CREATE TABLE IF NOT EXISTS table_servicos (
 	nome VARCHAR(50) NOT NULL,
 	descricao VARCHAR(255),
 	categoria VARCHAR(20) NOT NULL,
+    enabled BOOLEAN NOT NULL,
 	created_at DATETIME NOT NULL,
 	updated_at DATETIME NOT NULL
 );
@@ -93,8 +94,11 @@ ADD CONSTRAINT id_servicos
 FOREIGN KEY (id_servicos)
 REFERENCES table_servicos(id);
 
-ALTER TABLE table_orcamento
-ADD COLUMN enabled BOOLEAN NOT NULL;
+ALTER TABLE table_servicos
+DROP COLUMN enabled;
+
+ALTER TABLE table_servicos
+ADD COLUMN enabled BOOLEAN NOT NULL AFTER categoria;
 
 
 

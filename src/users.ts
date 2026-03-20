@@ -1,5 +1,7 @@
 import db from "./lib/db.js";
+import { Hash_Password } from "./utils/password_hash.js";
 import type { UserType } from "./utils/types.js"
+import UUID_GENERATE from "./utils/uuid_generate.js";
 
 
 
@@ -63,23 +65,23 @@ console.log(values.length)
        return null;
     }`
 
-    const agora = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    const data_atual = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
     const query = `INSERT INTO table_utilizadores (id, nome, numero_identificacao, data_nascimento, email, password, telefone, pais, localidade, enabled, created_at, update_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
     const values = [
-        String(user.id),
-        String(user.nome),
-        String(user.numero_identificacao),
-        user.data_nascimento, 
-        String(user.email),
-        String(user.password),
-        user.telefone ? String(user.telefone) : null,
-        String(user.pais),
-        String(user.localidade),
+        UUID_GENERATE(),
+        user.nome,
+        user.numero_identificacao,
+        String(user.data_nascimento), 
+        user.email,
+        await Hash_Password(user.password),
+        user.telefone,
+        user.pais,
+        user.localidade,
         user.enabled ? 1 : 0, 
-        agora, 
-        agora 
+        data_atual, 
+        data_atual 
     ];
 
     try {

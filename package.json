@@ -20,11 +20,14 @@
     "dev": "tsx watch src/index.ts"
   },
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
-    "mysql2": "^3.19.1"
+    "mysql2": "^3.19.1",
+    "uuid": "^13.0.0"
   },
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
     "@types/express": "^5.0.6",
     "@types/node": "^25.3.0",
     "ts-node": "^10.9.2",

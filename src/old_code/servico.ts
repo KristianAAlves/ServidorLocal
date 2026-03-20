@@ -1,5 +1,5 @@
-import type { ServicoType, ResponseType, ServicoDBType } from "./utils/types.js";
-import db from "./lib/db.js";
+import type { ServicoType, ResponseType, ServicoDBType } from "../utils/types.js";
+import db from "../lib/db.js";
 
 
 
