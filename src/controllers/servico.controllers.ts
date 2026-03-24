@@ -1,6 +1,6 @@
 import type { ServicoDBType } from "../utils/types.js";
 import type { Request, Response } from "express";
-import { ServicoModel } from "../models/servico.models.js";
+import { ServicoModel } from "../models/servico.model.js";
 
 export const ServicoController = {
 

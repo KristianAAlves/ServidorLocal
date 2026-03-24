@@ -1,7 +1,7 @@
 import db from "./lib/db.js";
 import { Hash_Password } from "./utils/password_hash.js";
 import type { UserType } from "./utils/types.js"
-import UUID_GENERATE from "./utils/uuid_generate.js";
+import generateUUID from "./utils/uuid_generate.js";
 
 
 
@@ -70,7 +70,7 @@ console.log(values.length)
     const query = `INSERT INTO table_utilizadores (id, nome, numero_identificacao, data_nascimento, email, password, telefone, pais, localidade, enabled, created_at, update_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
     const values = [
-        UUID_GENERATE(),
+        generateUUID(),
         user.nome,
         user.numero_identificacao,
         String(user.data_nascimento), 
