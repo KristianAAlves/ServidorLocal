@@ -1,9 +1,9 @@
 import express, {type Request, type Response} from "express";
-import { addServicoDB, AdicionarServico, ApagarServico, deleteService, getAllServices, getServiceById, ListarServico, obterServico, updateService } from "./old_code/servico.js";
+import { addServicoDB, AdicionarServico, ApagarServico, deleteService, getAllServices, getServiceById, ListarServico, obterServico, updateService } from "./servico.js";
 import { CalcularOrcamento, criarPrestadorDeServico, SelecionarPrestador, SelecionarServicos } from "./orcamento.js";
-import {GetUsers, GetUserById, InsertUser} from "./users.js";
+import {GetUsers, GetUserById, InsertUser} from "../users.js";
 import { get } from "node:http";
-import type { ServicoDBType } from "./utils/types.js";
+import type { ServicoDBType } from "../utils/types.js";
 
 const app = express();
 app.use(express.json())

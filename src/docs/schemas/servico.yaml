@@ -9,45 +9,75 @@
     #updated_at: string
 
 components:
-   schemas:
+  schemas:
    # schema principal de servico
-   servico:
-     type: object
-     properties:
-          id: 
-           type: integer
-           example: 1
-          nome:
-           type: string
-           example: "Serviço de Limpeza"
-          descricao:
-           type: string
-           example: "Servico de Limpeza Profissional para residencia"
-          categoria:
-           type: string
-           example: "limpeza"
-          enabled:
-           type: boolean
-           example: true
-          created_at:
-           type: string
-           example: "2022-01-01T00:00:00:000Z"
-          updated_at:
-           type: string
-           example: "2022-01-01T00:00:00:000Z"
+    servico:
+      type: object
+      properties:
+        id: 
+          type: integer
+          example: 1
+        nome:
+          type: string
+          example: "Serviço de Limpeza"
+        descricao:
+          type: string
+          example: "Servico de Limpeza Profissional para residencia"
+        categoria:
+          type: string
+          example: "limpeza"
+        enabled:
+          type: boolean
+          example: true
+        created_at:
+          type: string
+          example: "2022-01-01T00:00:00:000Z"
+        updated_at:
+          type: string
+          example: "2022-01-01T00:00:00:000Z"
+
+#schema para criar um novo servico
+    CreateService:
+      type: object
+      properties:
+        nome: 
+          type: object
+          example: "Servico de limpeza"
+        descricao:
+          type: string
+          example: Limpeza
+        categoria:
+          type: string
+          example: Limpeza
+        enabled:
+          type: boolean
+          example: true
 
 
-# schema generico de resposta 
-ResponseError:
-   type: object
-   properties:
-     message:
-        type: string
-        example: "Erro ao buscar serviços"
-     status: 
-        type: boolean
-        example: false
-     data:
-       type: object
-       properties:
-          null
+    ResponseSuccess:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Servico criado com sucesso"
+        status:
+          type: boolean
+          example: true
+        data:
+          type: object
+          $ref: "#/components/schemas/servico"
+
+    ResponseError:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Erro ao buscar serviço"
+        status:
+          type: boolean
+          example: false
+        data:
+          type: boolean
+          properties:
+            null
+

@@ -2,34 +2,103 @@
 
 paths:
   /service:
-   get:
-     summary: Listar todos os servicos
-     description: Retorna um lista de todos os servicos disponiveis
-     responses:
-       "200":
-        description: Lista de servicos
-        content:
-          application/json:
-           schema:
-             type: array
-             items: 
-               $ref: "#/components/schemas/Servico"
-       "404":
-       description: "Nenhum serviço encontrado"
-       content:
-          application/json:
-             schema:
-             type : object
-             $ref: "#/components/schemas/ResponseError"
-  
-  /service/create:
-       post:
-       sumarry: Criar um novo serviço
-       description: cria um novo serviço
-       requestBody:
-          required: true
+    get:
+      summary: Listar todos os servicos
+      description: Retorna um lista de todos os servicos disponiveis
+      responses:
+        "200":
+          description: Lista de servicos
           content:
             application/json:
-               schema: 
-                  type: object
-                  
+              schema:
+              type: array
+              items: 
+                $ref: "#/components/schemas/Servico"
+        "404":
+          description: "Nenhum serviço encontrado"
+          content:
+            application/json:
+              schema:
+              type : object
+              $ref: "#/components/schemas/ResponseError"
+  
+  /service/create:
+    post:
+      sumarry: Criar um novo serviço
+      description: cria um novo serviço
+      requestBody:
+        required: true
+        content:
+          application/json:
+              schema: 
+                type: object
+                $ref: "#/components/schemas/CreateService"
+      responses:
+      "200":
+        $ref: "#components/schemas/ResponseSuccess"
+      "400":
+        $ref: "#components/schemas/ResponseError"
+  
+  /service/get-by-id/{id}:
+    get:
+      summary: Buscar um servico por id
+      description: Retorna um servico especifico por ID
+      parameters:
+        name: id
+        in: path
+        required: true
+        description: ID do servico
+        schema:
+          type: integer
+          example: 1
+    responses:
+      "200":
+        description: servico encontrado
+        content:
+          application/json:
+            type: object
+            $ref: "#components/schemas/ResponseSuccess"
+      "400":
+        description: servico nao encontrado
+        content:
+          application/json:
+            type: object
+            $ref: "#components/schemas/ResponseError"
+
+  /service/update/{id}: 
+    put: 
+      summary: atualizar um servico
+      description: atualiza um servico especifico pelo ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do servico a ser atualizado
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+      required: true
+      content: 
+        application/json:
+          schema:
+          type: object
+    responses:
+      "200":
+        description: servico encontrado
+        content:
+          application/json:
+            type: object
+            $ref: "#components/schemas/ResponseSuccess"
+      "400":
+        description: dados invalidos
+        content:
+          application/json:
+            type: object
+            $ref: "#components/schemas/ResponseError"
+      "404":
+        description: servico nao encontrado
+        content:
+          application/json:
+            type: object
+            $ref: "#components/schemas/ResponseError"
